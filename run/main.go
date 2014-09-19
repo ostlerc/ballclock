@@ -17,7 +17,7 @@ func main() {
 		return
 	}
 
-	var clocks [10]int8
+	var clocks [10]uint8
 	clockv := int8(0)
 	found := false
 
@@ -42,7 +42,7 @@ func main() {
 			return
 		}
 
-		clocks[clockv] = int8(v)
+		clocks[clockv] = uint8(v)
 		clockv++
 	}
 
