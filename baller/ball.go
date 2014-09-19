@@ -115,15 +115,19 @@ func EvalBallClockV2(input_size int8) int {
 	return hours / 24
 }
 
-func EvalBallClockV6(end uint8) int {
-	var (
-		q                      [256]uint8
-		fmin, hour             [11]uint8
-		min1, min2, min3, min4 uint8
-		fminv, hourv, at       uint8
-		hours                  int
-	)
-	end = end - 1
+func EvalBallClockV6(input_size int8) int {
+	var q [256]uint8
+	var min1 uint8
+	var min2 uint8
+	var min3 uint8
+	var min4 uint8
+	var fmin [11]uint8
+	var hour [11]uint8
+	at := uint8(0)
+	end := uint8(input_size - 1)
+	fminv := 0
+	hourv := 0
+	hours := 0
 	for i := at + 1; i <= end; i++ {
 		q[i] = i
 	}
@@ -186,12 +190,13 @@ func EvalBallClockV6(end uint8) int {
 				i := at
 				for ; i != end; i++ {
 					if q[i] != x {
-						goto notDone
+						break
 					}
 					x++
 				}
-				return (hours + 1) / 24
-			notDone:
+				if i == end {
+					return (hours + 1) / 24
+				}
 
 				hourv = 0
 				end++
