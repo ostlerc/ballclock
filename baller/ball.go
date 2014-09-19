@@ -1,5 +1,59 @@
 package baller
 
+//First implementation, slow
+func EvalBallClock(input_size int8) int {
+
+	q := make([]int8, input_size, input_size)
+	var min [4]int8
+	minv := 0
+	var fmin [11]int8
+	fminv := 0
+	var hour [11]int8
+	hourv := 0
+
+	for i := int8(0); i < input_size; i++ {
+		q[i] = i
+	}
+
+	hours := 0
+	for {
+		v := q[minv]
+		if minv == 4 {
+			q = q[5:] //pop mins and 'v'
+			q = append(q, min[3], min[2], min[1], min[0])
+			minv = 0
+
+			if fminv == 11 {
+				q = append(q, fmin[10], fmin[9], fmin[8], fmin[7], fmin[6], fmin[5], fmin[4], fmin[3], fmin[2], fmin[1], fmin[0])
+				fminv = 0
+
+				if hourv == 11 {
+					q = append(q, hour[10], hour[9], hour[8], hour[7], hour[6], hour[5], hour[4], hour[3], hour[2], hour[1], hour[0], v)
+					hourv = 0
+					if clockDone(q) {
+						hours++
+						break
+					}
+				} else {
+					hour[hourv] = v
+					hourv++
+				}
+
+				hours++
+				//fmt.Printf("Hours=%d\n", hours)
+			} else {
+				fmin[fminv] = v
+				fminv++
+			}
+		} else {
+			min[minv] = v
+			minv++
+		}
+	}
+
+	return hours / 24
+}
+
 //Second implementation of ballclock using circular queue with no leaked memory
 func EvalBallClockV2(input_size int8) int {
 	q, e := newQueue(input_size)

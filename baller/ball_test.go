@@ -159,13 +159,12 @@ func TestBallV5(t *testing.T) {
 		t.Fatal("result was: ", n)
 	}
 }
-
+*/
 func BenchmarkClock(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		EvalBallClock(123)
 	}
 }
-*/
 
 func BenchmarkClockV2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
