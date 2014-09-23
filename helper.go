@@ -1,4 +1,4 @@
-package baller
+package ballclock
 
 import "fmt"
 

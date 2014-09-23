@@ -1,4 +1,4 @@
-package baller
+package ballclock
 
 //First implementation, slow
 func EvalBallClock(input_size int8) int {

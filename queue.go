@@ -1,4 +1,4 @@
-package baller
+package ballclock
 
 func queueDone(q *queue, size int8) bool {
 	for i := int8(0); i < size; i++ {

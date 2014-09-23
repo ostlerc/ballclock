@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/ostlerc/ballclock/baller"
+	"github.com/ostlerc/ballclock"
 	//"github.com/davecheney/profile"
 )
 
@@ -52,7 +52,7 @@ func main() {
 	}
 
 	for i := int8(0); i < clockv; i++ {
-		days := baller.EvalBallClockV6(clocks[i])
+		days := ballclock.EvalBallClockV6(clocks[i])
 		fmt.Printf("%d ball cycle after %d days.\n", clocks[i], days)
 	}
 }
