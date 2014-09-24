@@ -26,59 +26,6 @@ func TestQueue(t *testing.T) {
 	}
 }
 
-func TestStaticQueue(t *testing.T) {
-	n := int8(123)
-	q := newStaticQueue(n)
-	if q.end != 122 {
-		t.Fatal("End not correct", q.end)
-	}
-	if q.front != 0 {
-		t.Fatal("Front not correct", q.end)
-	}
-	for i := int8(0); i < int8(123); i++ {
-		if q.data.at(i) != i {
-			t.Fatal("incorrect data!")
-		}
-	}
-
-	if !q.done() {
-		t.Fatal("Done not correct")
-	}
-
-	q.push(4)
-	if q.front != 0 || q.end != 123 {
-		t.Fatal("Push did not work")
-	}
-	q.push(4)
-	q.push(4)
-	q.push(4)
-	q.push(4)
-	q.push(4)
-	if q.end != 0 {
-		t.Fatal("Push rollover did not work", q.end)
-	}
-
-	q = newStaticQueue(n)
-	for i := int8(0); i < int8(123); i++ {
-		if q.pop() != i || q.front != i+1 {
-			t.Fatal("Pop failed")
-		}
-	}
-
-	q.data.set(int8(4), int8(30))
-	if q.data.at(int8(4)) != int8(30) {
-		t.Fatal("set failed!")
-	}
-}
-
-/*
-func TestBall(t *testing.T) {
-	n := EvalBallClock(123)
-	if n != 108855 {
-		t.Fatal(n)
-	}
-}
-*/
 func TestBallV2(t *testing.T) {
 	n := EvalBallClockV2(123)
 	if n != 108855 {
@@ -138,28 +85,6 @@ func BenchmarkVarNamed(b *testing.B) {
 	}
 }
 
-/*
-func TestBallV3(t *testing.T) {
-	n := EvalBallClockV3(123)
-	if n != 108855 {
-		t.Fatal(n)
-	}
-}
-
-func TestBallV4(t *testing.T) {
-	n := EvalBallClockV4(123)
-	if n != 108855 {
-		t.Fatal("result was: ", n)
-	}
-}
-
-func TestBallV5(t *testing.T) {
-	n := EvalBallClockV5(27)
-	if n != 23 {
-		t.Fatal("result was: ", n)
-	}
-}
-*/
 func BenchmarkClock(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		EvalBallClock(123)
@@ -203,66 +128,3 @@ func BenchmarkRollSwitch(b *testing.B) {
 		}
 	}
 }
-
-/*
-func BenchmarkClockV3(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		EvalBallClockV3(123)
-	}
-}
-
-func BenchmarkClockV4(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		EvalBallClockV4(123)
-	}
-}
-
-func BenchmarkClockV5(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		EvalBallClockV5(123)
-	}
-}
-
-func BenchmarkArrayGet(b *testing.B) {
-	var a [128]int8
-	for i := int8(0); i < int8(127); i++ {
-		a[i] = i
-	}
-	for i := 0; i < b.N; i++ {
-		for j := int8(0); j < int8(127); j++ {
-			t := a[j]
-			t++
-		}
-	}
-}
-
-func BenchmarkInt7Get(b *testing.B) {
-	var a int7array
-	for i := int8(0); i < int8(127); i++ {
-		a.set(i, i)
-	}
-	for i := 0; i < b.N; i++ {
-		for j := int8(0); j < int8(127); j++ {
-			t := a.at(j)
-			t++
-		}
-	}
-}
-
-func BenchmarkArraySet(b *testing.B) {
-	var a [128]int8
-	for i := 0; i < b.N; i++ {
-		for j := int8(0); j < int8(127); j++ {
-			a[j] = j
-		}
-	}
-}
-
-func BenchmarkInt7Set(b *testing.B) {
-	var a int7array
-	for i := 0; i < b.N; i++ {
-		for j := int8(0); j < int8(127); j++ {
-			a.set(j, j)
-		}
-	}
-}*/
