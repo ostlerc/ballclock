@@ -6,12 +6,9 @@ import (
 	"strconv"
 
 	"github.com/ostlerc/ballclock"
-	//"github.com/davecheney/profile"
 )
 
 func main() {
-	//defer profile.Start(profile.CPUProfile).Stop()
-
 	if len(os.Args) < 2 {
 		fmt.Println("Too few arguments")
 		return
